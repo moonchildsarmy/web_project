@@ -9,6 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <title>Sixteen Clothing HTML Template</title>
 
@@ -38,7 +39,8 @@ https://templatemo.com/tm-546-sixteen-clothing
     <header class="">
       <nav class="navbar navbar-expand-lg">
         <div class="container">
-          <a class="navbar-brand" href="index.html"><h2>Sixteen <em>Clothing</em></h2></a>
+          <span class="text">{{ request.user }}</span>
+          <a class="navbar-brand" href="{% url 'home' %}"><h2>Sixteen <em>Clothing</em></h2></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -58,6 +60,15 @@ https://templatemo.com/tm-546-sixteen-clothing
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'contact' %}">Контакты</a>
               </li>
+              {% if user.is_active %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'cart' %}">Корзина</a>
+                </li>
+                {% else %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Авторизация</a>
+                  </li>
+              {% endif %}
             </ul>
           </div>
         </div>
@@ -80,25 +91,21 @@ https://templatemo.com/tm-546-sixteen-clothing
                     <div class="row">
                       <div class="col-md-12">
                         <div class="section-heading">
-                          <h2 style="font-family: system-ui;">New Collection</h2>
+                          <h2  style="font-size: 35px">Coming soon</h2>
                           <a href="{% url 'products' %}">view all products <i class="fa fa-angle-right"></i></a>
                         </div>
                       </div>
                       {% for product in product_list %}
                         <div class="col-md-4">
-                          <div class="product-item">
-                            <a><span class="badge badge-danger">coming soon</span><img src="{{ product.image.url }}" alt=""></a>
+                          <div class="product-item " data-aos="fade-up" data-aos-duration="2000" style="width: 365px">
+                            <img src="{{ product.image.url }}" alt="">
+                            <a href="#" class="badge-corner" style="position: absolute;top: 0;right: 0;width: 0;height: 0;border-top: 66px solid #f33f3f;order-top-color: rgba(0, 0, 0, 0.3);border-left: 66px solid transparent;padding: 0;background-color: transparent;border-radius: 0;">
+                              <span class="fa fa-star" style="position: absolute;top: -52px;left: -28px;font-size: 16px;color: #fff;"></span>
+                            </a>
                             <div class="down-content">
                               <a><h4>{{ product.title }}</h4></a>
                               <h6>${{ product.price }}</h6>
                               <p>{{ product.sub_title }}</p>
-                              <ul class="stars">
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                              </ul>
                             </div>
                           </div>
                         </div>
@@ -116,7 +123,7 @@ https://templatemo.com/tm-546-sixteen-clothing
                         </div>
                       </div>
                       <div class="col-md-6">
-                        <div class="left-content">
+                        <div class="left-content" data-aos="fade-right" data-aos-duration="2000">
                           <h4>Ищете лучшие продукты?</h4>
                           <p><a rel="nofollow" href="https://templatemo.com/tm-546-sixteen-clothing" target="_parent">This template</a> is free to use for your business websites. However, you have no permission to redistribute the downloadable ZIP file on any template collection website. <a rel="nofollow" href="https://templatemo.com/contact">Contact us</a> for more info.</p>
                           <ul class="featured-list">
@@ -130,7 +137,7 @@ https://templatemo.com/tm-546-sixteen-clothing
                         </div>
                       </div>
                       <div class="col-md-6">
-                        <div class="right-image">
+                        <div class="right-image animate__animated animate__fadeInRight">
                           <img src="{% static 'assets/images/feature-image.jpg' %}" alt="">
                         </div>
                       </div>
@@ -143,7 +150,7 @@ https://templatemo.com/tm-546-sixteen-clothing
                   <div class="container">
                     <div class="row">
                       <div class="col-md-12">
-                        <div class="inner-content">
+                        <div class="inner-content" data-aos="zoom-in-up">
                           <div class="row">
                             <div class="col-md-8">
                               <h4>Creative &amp; Unique <em>Sixteen</em> Products</h4>
@@ -180,6 +187,10 @@ https://templatemo.com/tm-546-sixteen-clothing
     <!-- Bootstrap core JavaScript -->
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
 
 
     <!-- Additional Scripts -->

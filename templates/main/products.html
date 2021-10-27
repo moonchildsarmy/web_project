@@ -9,6 +9,7 @@
       <meta name="description" content="">
       <meta name="author" content="">
       <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+      <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
       <title>Sixteen Clothing Products</title>
 
@@ -46,7 +47,7 @@
       <header class="">
         <nav class="navbar navbar-expand-lg">
           <div class="container">
-            <a class="navbar-brand" href="index.html"><h2>Sixteen <em>Clothing</em></h2></a>
+            <a class="navbar-brand" href="{%  url 'home' %}"><h2>Sixteen <em>Clothing</em></h2></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -66,6 +67,15 @@
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'contact' %}">Контакты</a>
                 </li>
+                {% if user.is_active %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'cart' %}">Корзина</a>
+                  </li>
+                  {% else %}
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'login' %}">Авторизация</a>
+                    </li>
+                {% endif %}
               </ul>
             </div>
           </div>
@@ -101,7 +111,7 @@
               </div>
             </div>
             <div class="col-md-12">
-                <div class="filters-content">
+                <div class="filters-content" data-aos="fade-up" data-aos-duration="2000">
                     <div class="row grid">
                       {% for products in product_list %}
                         {% if products.group == "outwear" %}
@@ -173,7 +183,7 @@
                 </div>
             </div>
             <nav class="list-num">
-              <ul class="pagination">
+              <ul class="pagination justify-content-center">
                 {% for i in paginator.page_range %}
                   <li class="page-item {% if i == page_number %} active {% endif %}">
                     <a class="page-link" href="?page={{ i }}">{{i}}</a>
@@ -230,6 +240,10 @@
       <!-- Bootstrap core JavaScript -->
       <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
       <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+      <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+      <script>
+        AOS.init();
+      </script>
 
 
       <!-- Additional Scripts -->

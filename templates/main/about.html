@@ -9,6 +9,7 @@
       <meta name="description" content="">
       <meta name="author" content="">
       <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+      <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
       <title>Sixteen Clothing - About Page</title>
 
@@ -52,19 +53,28 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'home' %}">Главное
-                    <span class="sr-only">(current)</span>
-                  </a>
+                  <a class="nav-link" href="{% url 'home' %}">Главное</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'products' %}">Наши Продукты</a>
                 </li>
                 <li class="nav-item active">
-                  <a class="nav-link" href="{% url 'about' %}">О нас</a>
+                  <a class="nav-link" href="{% url 'about' %}">О нас
+                    <span class="sr-only">(current)</span>
+                  </a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'contact' %}">Контакты</a>
                 </li>
+                {% if user.is_active %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'cart' %}">Корзина</a>
+                  </li>
+                  {% else %}
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'login' %}">Авторизация</a>
+                    </li>
+                {% endif %}
               </ul>
             </div>
           </div>
@@ -95,12 +105,12 @@
               </div>
             </div>
             <div class="col-md-6">
-              <div class="right-image">
+              <div class="right-image" data-aos="fade-right">
                 <img src="{% static 'assets/images/feature-image.jpg' %}" alt="">
               </div>
             </div>
             <div class="col-md-6">
-              <div class="left-content">
+              <div class="left-content" data-aos="fade-left" data-aos-duration="2000">
                 <h4>Кто мы и чем мы занимаемся?</h4>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed voluptate nihil eum consectetur similique? Consectetur, quod, incidunt, harum nisi dolores delectus reprehenderit voluptatem perferendis dicta dolorem non blanditiis ex fugiat. Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, consequuntur, modi mollitia corporis ipsa voluptate corrupti eum ratione ex ea praesentium quibusdam? Aut, in eum facere corrupti necessitatibus perspiciatis quis.</p>
                 <ul class="social-icons">
@@ -126,7 +136,7 @@
             </div>
             {% for human in employee %}
               <div class="col-md-4">
-                <div class="team-member">
+                <div class="team-member" data-aos="fade-up" data-aos-duration="1500">
                   <div class="thumb-container">
                     <img src="{{ human.image.url }}" alt="">
                     <div class="hover-effect">
@@ -157,38 +167,38 @@
         <div class="container">
           <div class="row">
             <div class="col-md-4">
-              <div class="service-item">
+              <div class="service-item" data-aos="zoom-in-up" data-aos-duration="1000">
                 <div class="icon">
-                  <i class="fa fa-gear"></i>
+                  <span><img class="avatar avatar-xxl mr-2" src="{% static 'assets/images/about_3.jpg' %}" width="100px" alt="img"></span>
                 </div>
                 <div class="down-content">
-                  <h4>Product Management</h4>
+                  <h4>Our Collabirations</h4>
                   <p>Lorem ipsum dolor sit amet, consectetur an adipisicing elit. Itaque, corporis nulla at quia quaerat.</p>
-                  <a href="#" class="filled-button">Read More</a>
+<!--                  <a href="#" class="filled-button">Read More</a>-->
                 </div>
               </div>
             </div>
             <div class="col-md-4">
-              <div class="service-item">
+              <div class="service-item" data-aos="zoom-in-up">
                 <div class="icon">
-                  <i class="fa fa-gear"></i>
+                  <span><img class="avatar avatar-xxl mr-2" src="{% static 'assets/images/about.jpg' %}" width="150px" alt="img"></span>
                 </div>
                 <div class="down-content">
-                  <h4>Customer Relations</h4>
+                  <h4>Our Designers</h4>
                   <p>Lorem ipsum dolor sit amet, consectetur an adipisicing elit. Itaque, corporis nulla at quia quaerat.</p>
-                  <a href="#" class="filled-button">Details</a>
+<!--                  <a href="#" class="filled-button">Details</a>-->
                 </div>
               </div>
             </div>
             <div class="col-md-4">
-              <div class="service-item">
+              <div class="service-item" data-aos="zoom-in-up">
                 <div class="icon">
-                  <i class="fa fa-gear"></i>
+                  <span><img class="avatar avatar-xxl mr-2" src="{% static 'assets/images/about_2.jpg' %}" width="150px" alt="img"></span>
                 </div>
                 <div class="down-content">
-                  <h4>Global Collection</h4>
+                  <h4>Our Delivery</h4>
                   <p>Lorem ipsum dolor sit amet, consectetur an adipisicing elit. Itaque, corporis nulla at quia quaerat.</p>
-                  <a href="#" class="filled-button">Read More</a>
+<!--                  <a href="#" class="filled-button">Read More</a>-->
                 </div>
               </div>
             </div>
@@ -255,6 +265,10 @@
       <!-- Bootstrap core JavaScript -->
       <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
       <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+      <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+      <script>
+        AOS.init();
+      </script>
 
 
       <!-- Additional Scripts -->

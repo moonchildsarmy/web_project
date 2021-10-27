@@ -9,6 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <title>Sixteen Clothing - Contact Page</title>
 
@@ -55,7 +56,7 @@ https://templatemo.com/tm-546-sixteen-clothing
                 <a class="nav-link" href="{% url 'home' %}">Главное
                   <span class="sr-only">(current)</span>
                 </a>
-              </li> 
+              </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'products' %}">Наши Продукты</a>
               </li>
@@ -63,8 +64,20 @@ https://templatemo.com/tm-546-sixteen-clothing
                 <a class="nav-link" href="{% url 'about' %}">О нас</a>
               </li>
               <li class="nav-item active">
-                <a class="nav-link" href="{% url 'contact' %}">Контакты</a>
+                <a class="nav-link" href="{% url 'contact' %}">Контакты
+                  <span class="sr-only">(current)</span>
+                </a>
               </li>
+                {% if user.is_active %}
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'cart' %}">Корзина</a>
+                    </li>
+                    {% else %}
+                      <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Авторизация</a>
+                      </li>
+                {% endif %}
+
             </ul>
           </div>
         </div>
@@ -101,27 +114,41 @@ https://templatemo.com/tm-546-sixteen-clothing
 	3. Click "Share" and choose "Embed map" tab
 	4. Copy only URL and paste it within the src="" field below
 -->
-            <div id="map">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d46804.72235796798!2d74.57312738313507!3d42.845500722406285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x389ec83d4891338f%3A0x44169a5916ae984e!2z0JHQsNC90Log0JHQsNC5LdCi0YPRiNGD0Lw!5e0!3m2!1sru!2skg!4v1634287698318!5m2!1sru!2skg" width="700" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-            </div>
+<!--            <div id="map">-->
+<!--              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d46804.72235796798!2d74.57312738313507!3d42.845500722406285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x389ec83d4891338f%3A0x44169a5916ae984e!2z0JHQsNC90Log0JHQsNC5LdCi0YPRiNGD0Lw!5e0!3m2!1sru!2skg!4v1634287698318!5m2!1sru!2skg" width="700" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>-->
+<!--            </div>-->
+              <div id="map" style="width:650px; height:400px"></div>
           </div>
           <div class="col-md-4">
-            <div class="left-content">
-              <h4>О нашем офисе</h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisic elit. Sed voluptate nihil eumester consectetur similiqu consectetur.<br><br>Lorem ipsum dolor sit amet, consectetur adipisic elit. Et, consequuntur, modi mollitia corporis ipsa voluptate corrupti.</p>
-              <ul class="social-icons">
-                <li><a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="https://twitter.com/?lang=ru"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="https://ru.linkedin.com/"><i class="fa fa-linkedin"></i></a></li>
-                <li><a href="https://www.behance.net/onboarding/adobe"><i class="fa fa-behance"></i></a></li>
-              </ul>
+            <div class="left-content" data-aos="fade-left" data-aos-duration="2000">
+                {% for address in addresses %}
+                  <h4 style="font-size: 30px">Где мы находимся</h4>
+                     <i class="fa fa-flag" style="margin-bottom: 10px"> {{ address.country }}</i><br>
+                     <i class="fa fa-location-arrow" style="margin-bottom: 10px"> {{ address.city }}</i><br>
+                     <i class="fa fa-location-arrow" style="margin-bottom: 10px"> {{ address.street }}</i><br>
+                     <i class="fa fa-phone" style="margin-bottom: 10px"> {{ address.phone_number }}</i>
+<!--                    <h10 class="product" style="font-size: 18px;margin-bottom: 10px">Страна</h10>-->
+<!--                    <p class="small" style="font-size: 15px;font-family: Monaco;">{{ address.country }}</p>-->
+<!--                    <h10 class="product" style="font-size: 18px;margin-bottom: 10px">Город</h10>-->
+<!--                    <p class="small" style="font-size: 15px;font-family: Monaco;">{{ address.city }}</p>-->
+<!--                    <h10 class="product" style="font-size: 18px;margin-bottom: 10px">Улица</h10>-->
+<!--                    <p class="small" style="font-size: 15px;font-family: Monaco;">{{ address.street }}</p>-->
+<!--                    <h10 class="product" style="font-size: 18px;margin-bottom: 10px">Телефон для связи</h10>-->
+<!--                    <p class="small" style="font-size: 15px;font-family: Monaco;">{{ address.phone_number }}</p>-->
+                    <ul class="social-icons">
+                        <li><a href="{{ address.facebook }}"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="{{ address.twitter }}"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="{{ address.linkedin }}"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="{{ address.behance }}"><i class="fa fa-behance"></i></a></li>
+                    </ul>
+                {% endfor %}
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    
+
     <div class="send-message">
       <div class="container">
         <div class="row">
@@ -131,7 +158,7 @@ https://templatemo.com/tm-546-sixteen-clothing
             </div>
           </div>
           <div class="col-md-8">
-            <div class="contact-form">
+            <div class="contact-form" data-aos="fade-right" data-aos-duration="2000">
               <form id="contact" action="" method="post">
                 {% csrf_token %}
                 <div class="row">
@@ -165,7 +192,7 @@ https://templatemo.com/tm-546-sixteen-clothing
             </div>
           </div>
           <div class="col-md-4">
-            <ul class="accordion">
+            <ul class="accordion" data-aos="fade-left" data-aos-duration="5000">
               <li>
                   <a>Accordion Title One</a>
                   <div class="content">
@@ -235,14 +262,14 @@ https://templatemo.com/tm-546-sixteen-clothing
       </div>
     </div>
 
-    
+
     <footer>
       <div class="container">
         <div class="row">
           <div class="col-md-12">
             <div class="inner-content">
               <p>Copyright &copy; 2020 Sixteen Clothing Co., Ltd.
-            
+
             - Design: <a rel="nofollow noopener" href="https://templatemo.com" target="_blank">TemplateMo</a></p>
             </div>
           </div>
@@ -250,10 +277,14 @@ https://templatemo.com/tm-546-sixteen-clothing
       </div>
     </footer>
 
-
+    <script src="https://maps.api.2gis.ru/2.0/loader.js?pkg=full"></script>
     <!-- Bootstrap core JavaScript -->
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
 
 
     <!-- Additional Scripts -->
@@ -264,7 +295,7 @@ https://templatemo.com/tm-546-sixteen-clothing
     <script src="{% static 'assets/js/accordions.js' %}"></script>
 
 
-    <script language = "text/Javascript"> 
+    <script language = "text/Javascript">
       cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
       function clearField(t){                   //declaring the array outside of the
       if(! cleared[t.id]){                      // function makes it static and global
@@ -275,7 +306,19 @@ https://templatemo.com/tm-546-sixteen-clothing
       }
     </script>
 
+<script type="text/javascript">
+    var map;
+    let log = {{contact.long_position}};
+    let lat = {{contact.lat_position}};
+    DG.then(function () {
+        map = DG.map('map', {
+            center: [log, lat],
+            zoom: 13
+        });
 
+        DG.marker([log, lat]).addTo(map).bindPopup('Вы кликнули по мне!');
+    });
+</script>
   </body>
 
 </html>
