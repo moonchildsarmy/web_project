@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+
+    <title>Sixteen Clothing HTML Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<!--
+
+TemplateMo 546 Sixteen Clothing
+
+https://templatemo.com/tm-546-sixteen-clothing
+
+-->
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/templatemo-sixteen.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/comment.css' %}">
+
+  </head>
+
+  <body>
+    <header class="">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a class="navbar-brand" href="index.html"><h2>Sixteen <em>Clothing</em></h2></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'home' %}">Главное</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'products' %}">Наши Продукты</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'about' %}">О нас</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'contact' %}">Контакты</a>
+              </li>
+                {% if user.is_active %}
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'cart' %}">Корзина
+                        <span class="sr-only">(current)</span>
+                      </a>
+                    </li>
+                    {% else %}
+                      <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Авторизация</a>
+                      </li>
+                {% endif %}
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="text-contents">
+              <h4 class="text-center" style="font-size: 50px;font-weight: bold;margin-top: 150px;margin-bottom: 70px;font-family: system-ui;">Ваша корзина</h4>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="row row-cards" style="margin-left: 130px;">
+      <div class="col-lg-10 col-md-10 col-sm-10 bootstrap snippets">
+          <!-- Cart -->
+          <div class="card">
+              <div class="card-body hero-feature">
+                  <div class="table-responsive push">
+                      <table class="table table-bordered table-hover tbl-cart text-nowrap">
+                          <thead>
+                              <tr style="font-size: 18px;font-weight: bold;color: #3F3F3F">
+                                  <td class="hidden-xs">Image</td>
+                                  <td>Product Name</td>
+                                  <td>Size</td>
+                                  <td class="td-qty">Quantity</td>
+                                  <td>Unit Price</td>
+                                  <td>Sub Total</td>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              {% for obj in object %}
+                                  <tr>
+                                      <td class="hidden-xs">
+                                          <a href="#">
+                                              <img src="{{ obj.product.image.url }}" alt=" " title="" width="100" height="120" style="position: center">
+                                          </a>
+                                      </td>
+                                      <td><a style="font-size: 15px">{{ obj.product.title }} </a>
+                                      </td>
+
+                                      <td>
+                                          <a>{{ obj.size }}</a>
+                                      </td>
+                                      <td>
+                                          <a>{{ obj.count }}</a>
+                                      </td>
+                                      <td >$ {{ obj.product.price}}</td>
+                                      <td>$ 122.21</td>
+                                      <td class="text-center">
+                                          <a href="{% url 'delete' obj.id %}" class="remove_cart" >
+                                              <i class="fa fa-trash"></i>
+                                          </a>
+                                      </td>
+                                  </tr>
+                              {% endfor %}
+                          </tbody>
+                      </table>
+                  </div>
+                  <div class="float-left mt-2">
+                      <div class="row">
+                          <div class="col-8"><a href="{% url 'products' %}" class="btn btn-info mt-2"><i class="fa fa-arrow-circle-left"></i> Continue Shopping</a></div>
+                      </div>
+                  </div>
+                  <div class=" float-right">
+<!--                      <a href="cart.html" class="btn btn-warning mt-2">Update Cart</a>-->
+                      <a href="#" class="btn btn-success mt-2">Checkout <i class="fa fa-arrow-circle-right"></i></a>
+                  </div>
+
+              </div>
+          </div>
+      </div>
+    </div>
+  </body>
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="inner-content">
+              <p>Copyright &copy; 2020 Sixteen Clothing Co., Ltd.
+
+            - Design: <a rel="nofollow noopener" href="https://templatemo.com" target="_blank">TemplateMo</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+
+    <!-- Additional Scripts -->
+    <script src="{% static 'assets/js/custom.js' %}"></script>
+    <script src="{% static 'assets/js/owl.js' %}"></script>
+    <script src="{% static 'assets/js/slick.js' %}"></script>
+    <script src="{% static 'assets/js/isotope.js' %}"></script>
+    <script src="{% static 'assets/js/accordions.js' %}"></script>
+
+
+    <script language = "text/Javascript">
+      cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
+      function clearField(t){                   //declaring the array outside of the
+      if(! cleared[t.id]){                      // function makes it static and global
+          cleared[t.id] = 1;  // you could use true and false, but that's more typing
+          t.value='';         // with more chance of typos
+          t.style.color='#fff';
+          }
+      }
+    </script>
+</html>
+								<!-- End Cart -->
