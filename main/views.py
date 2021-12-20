@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Product, Comments, Employee, Order, Contact
-from .forms import ReviewForm, MessageForm, OrderForm,CreateUserForm
+from .form import ReviewForm, MessageForm, OrderForm,CreateUserForm
 from django.core.paginator import Paginator
 from django.http import HttpResponseNotFound
 
@@ -8,7 +8,6 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
-
 
 
 def registerPage(request):
@@ -167,10 +166,6 @@ def delete(request, id):
         return HttpResponseNotFound("<h2>Товар не найден</h2>")
 
 
-
-
-
-
 # def category(request, id):
 #     categories = Category.objects.get(id=id)
 #     queryset = Product.objects.filter(category=categories)
@@ -181,12 +176,5 @@ def delete(request, id):
 #         return render(request, 'main/products.html', c)
 #     else:
 #         return render(request, 'main/products.html')
-
-
-
-
-
-
-
 
 # Create your views here.

@@ -44,7 +44,6 @@ class OrderForm(forms.ModelForm):
         fields = ("count", "size")
 
 
-
 class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
