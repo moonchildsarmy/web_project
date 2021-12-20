@@ -27,7 +27,6 @@ def registerPage(request):
     return render(request, 'main/register.html', context)
 
 
-
 def loginPage(request):
     if request.method == 'POST':
         username = request.POST.get('username')
